@@ -9,7 +9,7 @@ const __dirname = dirname(__filename);
 
 async function generateImage() {
   const outputPath = "./images/nodeHtmlToImage_joejuice.png";
-  const templatePath = join(__dirname, "joejuice.html");
+  const templatePath = join(__dirname, "/templates/joejuice.html");
 
   try {
     const html = readFileSync(templatePath, "utf8");

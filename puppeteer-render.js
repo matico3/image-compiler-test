@@ -31,7 +31,7 @@ const options = {
       width: options.width,
     });
 
-    const templatePath = path.join(__dirname, "joejuice.html");
+    const templatePath = path.join(__dirname, "/templates/joejuice.html");
     await page.goto("file://" + templatePath);
 
     const imageBuffer = await page.screenshot({

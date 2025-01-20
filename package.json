@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "nodeHtmlToImage": "node nodeHtmlToImage.js",
+    "nodeHtmlToImage": "node node-html-to-image-render.js",
     "canvas": "node canvas-render.js",
     "puppeteer": "node puppeteer-render.js",
     "test": "echo \"Error: no test specified\" && exit 1"

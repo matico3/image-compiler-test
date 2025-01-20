@@ -4,7 +4,7 @@ const { JSDOM } = require("jsdom");
 const path = require("path");
 
 async function renderHtmlToCanvas() {
-  const templateHtml = fs.readFileSync("./template.html", "utf-8");
+  const templateHtml = fs.readFileSync("/templates/telekom.html", "utf-8");
 
   const dom = new JSDOM(templateHtml);
   const document = dom.window.document;
