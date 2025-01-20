@@ -1,0 +1,208 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Telekom device</title>
+    <style>
+      html,
+      body,
+      * {
+        -webkit-font-smoothing: none;
+        font-smooth: never;
+        text-rendering: geometricPrecision; /* Improved spacing */
+        image-rendering: pixelated; /* Prevent antialiasing in images */
+      }
+
+      /* Set full height and width for the root element */
+      html {
+        width: 480px;
+        height: 800px;
+      }
+
+      body {
+        /* arial narrow */
+        /* font-family: "Arial Narrow", Arial, sans-serif; */
+        font-family: "TS", sans-serif;
+        font-size: 17px;
+        font-weight: bold;
+      }
+
+      .content {
+        margin: 22px;
+        margin-top: 0;
+        display: flex;
+        flex-direction: column;
+        width: 440px;
+        height: 800px;
+      }
+
+      .header {
+        height: 300px;
+        display: flex;
+      }
+
+      .name-box {
+        font-family: "TS", sans-serif;
+        align-items: center;
+        height: 100px;
+        width: 400px;
+        font-size: 32px;
+        text-align: center;
+      }
+
+      .flex-container {
+        display: flex;
+        justify-content: space-around;
+        align-items: end;
+      }
+
+      .child {
+        width: 100%;
+        align-self: flex-end;
+        text-align: bottom;
+      }
+
+      .whole-price {
+        font-family: "TS", sans-serif;
+        font-size: 30px;
+        font-weight: bold;
+      }
+
+      .normal {
+        font-family: "TS", sans-serif;
+        font-weight: normal;
+        font-size: 28px;
+      }
+
+      p {
+        width: 160px;
+      }
+
+      .qr-text {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        font-size: 18px;
+        height: 100%;
+      }
+
+      .x24 {
+        font-family: "TS", sans-serif;
+        font-size: 20pt;
+      }
+
+      .brand {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        text-align: start;
+        height: 100px;
+        font-weight: 400;
+        font-family: "TS", sans-serif;
+        font-size: 23px;
+      }
+      .qr-root {
+        height: 90px !important;
+        padding-top: 25px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="content">
+      <div class="child header">
+        <div class="brand" style="height: 300px">
+          <img
+            src="https://example.com/phone-image.jpg"
+            style="height: 300px; width: auto; object-fit: contain"
+          />
+        </div>
+      </div>
+      <div class="child name-box">
+        Samsung
+        <span style="font-weight: 600; width: 400px"
+          >Galaxy S24 Ultra<br
+        /></span>
+        512GB
+      </div>
+      <div style="display: flex; flex-direction: column; height: 200px">
+        <!-- discounted price -->
+        <div class="child flex-container" style="margin-bottom: 10px">
+          <div class="child">
+            <span class="whole-price">660,00 €</span>
+          </div>
+          <div class="child" style="text-align: center">ali</div>
+          <div class="child" style="width: 550px">
+            <span class="normal">24 x</span>
+            <span class="whole-price">27,50 €</span>
+          </div>
+        </div>
+        <div
+          class="child flex-container"
+          style="text-align: left; margin-bottom: 20px; font-size: 17.5px"
+        >
+          akcijska cena vezava 24 mesecev
+        </div>
+
+        <!-- loyalty price  -->
+        <div class="child flex-container" style="margin-bottom: 10px">
+          <div class="child">
+            <span class="whole-price">952,80 €</span>
+          </div>
+          <div class="child" style="text-align: center; font-size: 19px">
+            ali
+          </div>
+          <div class="child" style="width: 550px">
+            <span class="normal">24 x</span>
+            <span class="whole-price">39,70 €</span>
+          </div>
+        </div>
+        <div
+          class="child flex-container"
+          style="text-align: left; font-size: 17.5px"
+        >
+          Program zvestobe vezava 24 mesecev + 300 točk
+        </div>
+      </div>
+
+      <!-- regular price + QR -->
+      <div class="child flex-container">
+        <div class="child" style="align-self: flex-start">
+          <p><span class="whole-price">660,00 €</span><br />cena brez vezave</p>
+        </div>
+        <div class="child qr-text">
+          <div style="width: 105px; overflow: visible; word-wrap: break-word">
+            <p style="word-wrap: break-word; font-size: 17.5px">
+              za več informacij <br />
+              o cenah in <br />
+              značilnostih <br />
+              mobitela <br />poskenirajte <br />
+              QR kodo
+            </p>
+          </div>
+          <div style="align-self: flex-start">
+            <img
+              src="https://example.com/qr-code.png"
+              alt="QR Code"
+              style="width: 100px; height: 100px"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="child flex-container">
+        <p>
+          <span class="whole-price">660,00 €</span>najnižja akcijska cena v
+          zadnjih 30 dneh
+        </p>
+      </div>
+      <div class="footer">www.telekom.si</div>
+    </div>
+  </body>
+</html>
