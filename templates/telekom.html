@@ -4,6 +4,24 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Telekom device</title>
     <style>
+      @font-face {
+        font-family: "TS";
+        src: local("TS Regular");
+        font-weight: 400;
+      }
+
+      @font-face {
+        font-family: "TS";
+        src: local("TS Medium");
+        font-weight: 500;
+      }
+
+      @font-face {
+        font-family: "TS";
+        src: local("TS SemiBold");
+        font-weight: 600;
+      }
+
       html,
       body,
       * {
@@ -24,7 +42,7 @@
         /* font-family: "Arial Narrow", Arial, sans-serif; */
         font-family: "TS", sans-serif;
         font-size: 17px;
-        font-weight: bold;
+        font-weight: 500; /* Changed to Medium weight */
       }
 
       .content {
@@ -46,8 +64,9 @@
         align-items: center;
         height: 100px;
         width: 400px;
-        font-size: 32px;
+        font-size: 34px;
         text-align: center;
+        font-weight: 400; /* SemiBold for the name box */
       }
 
       .flex-container {
@@ -65,12 +84,12 @@
       .whole-price {
         font-family: "TS", sans-serif;
         font-size: 30px;
-        font-weight: bold;
+        font-weight: 600; /* SemiBold for prices */
       }
 
       .normal {
         font-family: "TS", sans-serif;
-        font-weight: normal;
+        font-weight: 400; /* Regular weight */
         font-size: 28px;
       }
 
@@ -104,7 +123,7 @@
         align-items: flex-start;
         text-align: start;
         height: 100px;
-        font-weight: 400;
+        font-weight: 400; /* Regular weight for footer */
         font-family: "TS", sans-serif;
         font-size: 23px;
       }

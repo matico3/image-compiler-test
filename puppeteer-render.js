@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import { writeFile } from "fs/promises";
+import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
 import { exec } from "child_process";
@@ -40,7 +40,10 @@ async function renderWithPuppeteer(template = "joejuice") {
 
     await browser.close();
 
-    await writeFile("./images/${template}/puppeteer-rendered.png", imageBuffer);
+    const outputDir = `./images/${template}`;
+    await mkdir(outputDir, { recursive: true });
+
+    await writeFile(`./images/${template}/puppeteer-rendered.png`, imageBuffer);
     console.log(
       "Image has been rendered successfully to puppeteer-rendered.png"
     );
