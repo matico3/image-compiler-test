@@ -41,12 +41,12 @@ const options = {
 
     await browser.close();
 
-    await writeFile("puppeteer-rendered.png", imageBuffer);
+    await writeFile("./images/puppeteer-rendered.png", imageBuffer);
     console.log(
       "Image has been rendered successfully to puppeteer-rendered.png"
     );
 
-    exec(`open -a Preview puppeteer-rendered.png`, (error) => {
+    exec(`open -a Preview ./images/puppeteer-rendered.png`, (error) => {
       if (error) {
         console.error("Error opening Preview:", error);
       }
