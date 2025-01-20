@@ -16,7 +16,7 @@ const options = {
   height: 128,
 };
 
-(async () => {
+async function renderWithPuppeteer(template = "joejuice") {
   try {
     const browser = await puppeteer.launch({
       args: [
@@ -30,8 +30,7 @@ const options = {
       height: options.height,
       width: options.width,
     });
-
-    const templatePath = path.join(__dirname, "/templates/joejuice.html");
+    const templatePath = path.join(__dirname, `/templates/${template}.html`);
     await page.goto("file://" + templatePath);
 
     const imageBuffer = await page.screenshot({
@@ -41,18 +40,24 @@ const options = {
 
     await browser.close();
 
-    await writeFile("./images/puppeteer-rendered.png", imageBuffer);
+    await writeFile("./images/${template}/puppeteer-rendered.png", imageBuffer);
     console.log(
       "Image has been rendered successfully to puppeteer-rendered.png"
     );
 
-    exec(`open -a Preview ./images/puppeteer-rendered.png`, (error) => {
-      if (error) {
-        console.error("Error opening Preview:", error);
+    exec(
+      `open -a Preview ./images/${template}/puppeteer-rendered.png`,
+      (error) => {
+        if (error) {
+          console.error("Error opening Preview:", error);
+        }
       }
-    });
+    );
   } catch (error) {
     console.error("Error during rendering:", error);
     process.exit(1);
   }
-})();
+}
+
+const template = process.argv[2] || "joejuice";
+renderWithPuppeteer(template);

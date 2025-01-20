@@ -7,9 +7,9 @@ import { dirname, join } from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-async function generateImage() {
-  const outputPath = "./images/nodeHtmlToImage_joejuice.png";
-  const templatePath = join(__dirname, "/templates/joejuice.html");
+async function generateImage(template = "joejuice") {
+  const outputPath = `./images/${template}/node-html-to-image.png`;
+  const templatePath = join(__dirname, `/templates/${template}.html`);
 
   try {
     const html = readFileSync(templatePath, "utf8");
@@ -43,4 +43,5 @@ async function generateImage() {
   }
 }
 
-generateImage();
+const template = process.argv[2] || "joejuice";
+generateImage(template);

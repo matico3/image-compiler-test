@@ -1,7 +1,7 @@
 {
   "name": "html-to-image-test",
   "version": "1.0.0",
-  "description": "Testing node-html-to-image functionality",
+  "description": "Testing different image compilers",
   "main": "index.js",
   "type": "module",
   "scripts": {

@@ -3,8 +3,8 @@ const { createCanvas, loadImage } = require("canvas");
 const { JSDOM } = require("jsdom");
 const path = require("path");
 
-async function renderHtmlToCanvas() {
-  const templateHtml = fs.readFileSync("/templates/telekom.html", "utf-8");
+async function renderHtmlToCanvas(template = "telekom") {
+  const templateHtml = fs.readFileSync(`/templates/${template}.html`, "utf-8");
 
   const dom = new JSDOM(templateHtml);
   const document = dom.window.document;
@@ -106,10 +106,10 @@ async function renderHtmlToCanvas() {
   drawText("www.telekom.si", 240, 750, "23px Arial");
 
   const buffer = canvas.toBuffer("image/png");
-  const outputPath = "./images/canvas-output.png";
+  const outputPath = `./images/${template}/canvas-output.png`;
 
-  if (!fs.existsSync("./images")) {
-    fs.mkdirSync("./images");
+  if (!fs.existsSync(`./images/${template}`)) {
+    fs.mkdirSync(`./images/${template}`);
   }
 
   fs.writeFileSync(outputPath, buffer);
@@ -123,4 +123,5 @@ async function renderHtmlToCanvas() {
   });
 }
 
-renderHtmlToCanvas().catch(console.error);
+const template = process.argv[2] || "telekom";
+renderHtmlToCanvas(template).catch(console.error);
