@@ -1,4 +1,3 @@
-# FROM node:18.20.2
 FROM node:18.20.2
 
 RUN npm i -g pnpm@7.21.0
@@ -9,7 +8,7 @@ WORKDIR /app
 
 # Install dependencies for Puppeteer
 RUN apt-get update && \
-    apt-get -y install chromium xvfb gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 \
+    apt-get -y install chromium=127.0.6533.88* xvfb gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 \
     libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 \
     libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 \
     libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 libxss1 \
@@ -33,7 +32,7 @@ RUN chmod 644 /usr/share/fonts/truetype/Arial/* \
 # Update font cache
 RUN fc-cache -fv
 
-# Configure font rendering
+# Configure font rendering to disable antialiasing
 RUN echo '<?xml version="1.0"?>' > /etc/fonts/local.conf && \
     echo '<!DOCTYPE fontconfig SYSTEM "fonts.dtd">' >> /etc/fonts/local.conf && \
     echo '<fontconfig>' >> /etc/fonts/local.conf && \
@@ -46,22 +45,9 @@ RUN echo '<?xml version="1.0"?>' > /etc/fonts/local.conf && \
     echo '  </match>' >> /etc/fonts/local.conf && \
     echo '</fontconfig>' >> /etc/fonts/local.conf
 
-# Install Chrome
-
-# RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-#     && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
-#     && apt-get update \
-#     && apt-get install -y google-chrome-stable \
-#     && rm -rf /var/lib/apt/lists/*
-# ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-
 # Set Puppeteer specific environment variables
-# Install Chrome for Puppeteer as root
-# RUN npx puppeteer browsers install chrome
 ENV PUPPETEER_PRODUCT=chrome \
     PUPPETEER_SKIP_DOWNLOAD=true \
-    # PUPPETEER_ARGS='--no-sandbox --disable-setuid-sandbox' \
-    # PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
     PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 # Add these lines to ensure proper permissions and sandbox setup
@@ -81,4 +67,4 @@ RUN pnpm install
 COPY --chown=appuser:appuser . .
 
 # Command to run the puppeteer script
-CMD ["pnpm", "run", "puppeteer"] 
+# CMD ["pnpm", "run", "puppeteer"] 
