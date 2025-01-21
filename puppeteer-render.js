@@ -2,7 +2,6 @@ import puppeteer from "puppeteer";
 import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { fileURLToPath } from "url";
-import { exec } from "child_process";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,20 +15,27 @@ const options = {
   height: 128,
 };
 
+const OPEN_AFTER_CREAATE = false;
 async function renderWithPuppeteer(template = "joejuice") {
   try {
     const browser = await puppeteer.launch({
-      args: [
-        "--disable-font-antialiasing",
-        "--disable-smooth-scrolling",
-        "--font-render-hinting=none",
-      ],
+      // args: [
+      //   "--disable-font-antialiasing",
+      //   "--disable-smooth-scrolling",
+      //   "--font-render-hinting=none",
+      //   "--disable-gpu",
+      //   "--font-antialiasing=none",
+      //   "--disable-lcd-text",
+      // ],
+      defaultViewport: {
+        width: options.width,
+        height: options.height,
+        deviceScaleFactor: 1,
+      },
     });
+    const version = await browser.version();
+    console.log("Chromium version:", version);
     const page = await browser.newPage();
-    await page.setViewport({
-      height: options.height,
-      width: options.width,
-    });
     const templatePath = path.join(__dirname, `/templates/${template}.html`);
     await page.goto("file://" + templatePath);
 
@@ -48,14 +54,16 @@ async function renderWithPuppeteer(template = "joejuice") {
       "Image has been rendered successfully to puppeteer-rendered.png"
     );
 
-    exec(
-      `open -a Preview ./images/${template}/puppeteer-rendered.png`,
-      (error) => {
-        if (error) {
-          console.error("Error opening Preview:", error);
-        }
-      }
-    );
+    // if (OPEN_AFTER_CREAATE) {
+    //   exec(
+    //     `open -a Preview ./images/${template}/puppeteer-rendered.png`,
+    //     (error) => {
+    //       if (error) {
+    //         console.error("Error opening Preview:", error);
+    //       }
+    //     }
+    //   );
+    // }
   } catch (error) {
     console.error("Error during rendering:", error);
     process.exit(1);
